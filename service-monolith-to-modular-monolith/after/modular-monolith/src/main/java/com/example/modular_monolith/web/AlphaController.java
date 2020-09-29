@@ -1,9 +1,8 @@
-package com.wolfram.modular_monolith.web;
+package com.example.modular_monolith.web;
 
 import model.Answer;
 import model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,13 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import service.AlphaService;
 
 @RestController
-@RequestMapping("wolfram")
-public class WolframController {
-
+@RequestMapping("alpha")
+public class AlphaController {
     @Autowired
     AlphaService alphaService;
 
-    @PostMapping("/alpha")
+    @PostMapping("/answer-question")
     public ResponseEntity<Answer> answerQuestion(@RequestBody Question question) {
         try {
             return new ResponseEntity(alphaService.answer(question), HttpStatus.OK);

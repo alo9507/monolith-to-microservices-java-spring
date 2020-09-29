@@ -1,7 +1,6 @@
 package service;
 
 import model.Answer;
-import model.ParsedQuestion;
 import model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -18,7 +17,7 @@ public class AlphaServiceMicroservice implements AlphaService {
     @Override
     public Answer answer(Question question) {
         ResponseEntity<Answer> answerResponseEntity =
-                restTemplate.postForEntity("http://localhost:8080/wolfram/alpha", question, Answer.class);
+                restTemplate.postForEntity("http://localhost:8080/wolfram/answer-question", question, Answer.class);
 
         return answerResponseEntity.getBody();
     }

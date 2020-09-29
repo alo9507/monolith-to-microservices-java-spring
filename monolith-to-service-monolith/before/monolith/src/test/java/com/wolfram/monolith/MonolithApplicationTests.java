@@ -1,14 +1,50 @@
 package com.wolfram.monolith;
 
+import com.wolfram.monolith.model.Answer;
+import com.wolfram.monolith.model.Question;
+import com.wolfram.monolith.web.AlphaController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class MonolithApplicationTests {
 
-	@Test
-	void contextLoads() {
+	@LocalServerPort
+	private int port;
 
+	@Autowired
+	private AlphaController controller;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+
+	Question question;
+
+	@BeforeEach
+	public void setup() {
+		question = new Question("my question");
+	}
+
+	@Test
+	public void alphaReturnsCorrectAnswer() {
+		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer", question, Answer.class);
+		assertThat(answer.getAnswer()).isEqualTo("2");
+	}
+
+	@Test
+	public void alphaReturnsAnswerInXTime() {
+		long startTime = System.nanoTime();
+		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer", question, Answer.class);
+		long endTime = System.nanoTime();
+
+		assertThat((endTime - startTime)/1000000).isLessThan(1000);
 	}
 
 }

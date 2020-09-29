@@ -7,6 +7,8 @@ public class Answer {
         this.answer = answer;
     }
 
+    public Answer() {}
+
     public String getAnswer() {
         return answer;
     }

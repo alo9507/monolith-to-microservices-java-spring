@@ -8,11 +8,11 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.wolfram</groupId>
+	<groupId>com.example</groupId>
 	<artifactId>modular_monolith</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>modular_monolith</name>
-	<description>Wolfram Monolith to Microservices Demo</description>
+	<description>Modular Monolith</description>
 
 	<properties>
 		<java.version>11</java.version>

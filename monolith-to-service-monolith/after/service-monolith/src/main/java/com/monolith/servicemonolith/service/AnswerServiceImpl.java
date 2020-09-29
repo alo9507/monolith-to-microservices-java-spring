@@ -2,7 +2,6 @@ package com.monolith.servicemonolith.service;
 
 import com.monolith.servicemonolith.model.Answer;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

@@ -2,7 +2,7 @@ package com.monolith.servicemonolith;
 
 import com.monolith.servicemonolith.model.Answer;
 import com.monolith.servicemonolith.model.Question;
-import com.monolith.servicemonolith.web.WolframController;
+import com.monolith.servicemonolith.web.AlphaController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ class ServiceMonolithApplicationTests {
 	private int port;
 
 	@Autowired
-	private WolframController controller;
+	private AlphaController controller;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -34,14 +34,14 @@ class ServiceMonolithApplicationTests {
 
 	@Test
 	public void alphaReturnsCorrectAnswer() {
-		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer", question, Answer.class);
+		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer-question", question, Answer.class);
 		assertThat(answer.getAnswer()).isEqualTo("2");
 	}
 
 	@Test
 	public void alphaReturnsAnswerInXTime() {
 		long startTime = System.nanoTime();
-		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer", question, Answer.class);
+		Answer answer = this.restTemplate.postForObject("http://localhost:" + port + "/alpha/answer-question", question, Answer.class);
 		long endTime = System.nanoTime();
 
 		assertThat((endTime - startTime)/1000000).isLessThan(1000);
