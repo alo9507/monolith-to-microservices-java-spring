@@ -17,7 +17,7 @@ public class AlphaServiceMicroservice implements AlphaService {
     @Override
     public Answer answer(Question question) {
         ResponseEntity<Answer> answerResponseEntity =
-                restTemplate.postForEntity("http://localhost:8080/wolfram/answer-question", question, Answer.class);
+                restTemplate.postForEntity("http://localhost:8080/alpha/answer-question", question, Answer.class);
 
         return answerResponseEntity.getBody();
     }
